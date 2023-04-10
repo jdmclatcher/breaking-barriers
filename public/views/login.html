@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <script src="../public/scripts/login.js" defer></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="../../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container">
+    <h1 class="display-3 p-3">
+        Login
+    </h1>
+    <div class="col-md-4 p-3">
+        <form method="POST" action="/login">
+            <div class="mb-3">
+                <label for="id" class="form-label">ID:</label>
+                <input type="text" class="form-control" name="id" id="id" required>
+            </div>
+            <div class="mb-3">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" name="password" id="password" required>
+            </div>
+            <div hidden id="message" class="alert alert-danger" role="alert">
+                <p></p>
+            </div>
+            <div class="p-1">
+                <input type="submit" class="btn btn-primary" value="Login" id="login">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
