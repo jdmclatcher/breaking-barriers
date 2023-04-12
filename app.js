@@ -81,6 +81,24 @@ app.post("/login", function(req, res) {
     })
 });
 
+// Create New User
+app.post("/create_user", (req, res) => {
+    // Extract New Username and Password
+    let {newUsername, newPassword} = req.body;
+
+    // Check to see if Username already exists
+    db.query("SELECT perID FROM person WHERE perID = $1", [newUsername], (err, result) => {
+        if (err) {
+            console.log(err);
+            res.json({success: false, message: 'Failed to create new user'});
+        } else if (result.rowCount > 0) {
+            res.json({success: false, message: 'ID already exists'});
+        }
+
+    })
+});
+
+
 // main menu screen
 app.get("/menu", function (req, res) {
     if (userType == null) {
