@@ -85,6 +85,7 @@ app.post("/login", function(req, res) {
 app.post("/create_user", (req, res) => {
     // Extract new perID and password
     let {newPerID, newPassword} = req.body;
+    console.log(newPerID, newPassword);
 
     // Check to see if new perID already exists
     let getPerIDQuery = "SELECT perID FROM person WHERE perID = $1";
@@ -95,10 +96,10 @@ app.post("/create_user", (req, res) => {
             res.json({success: false, message: 'Failed to create new user'});
         }
         
+        console.log(result);
         // Check rowCount > 0 to see if newPerID already exists
         if (result.rowCount) {
             // Duplicate perID exists so send error message
-            duplicatePerID = true;
             res.json({success: false, message: 'ID already exists'});
         } else {
             // Create new user since new perID is unique
@@ -113,8 +114,7 @@ app.post("/create_user", (req, res) => {
                 }
             });
         }
-
-    })
+    });
 });
 
 
