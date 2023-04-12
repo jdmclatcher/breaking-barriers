@@ -83,26 +83,27 @@ app.post("/login", function(req, res) {
 
 // Create New User
 app.post("/create_user", (req, res) => {
-    // Extract New Username and Password
-    let {newUsername, newPassword} = req.body;
+    // Extract new perID and password
+    let {newPerID, newPassword} = req.body;
 
-    // Check to see if Username already exists
-    getPerIDQuery = "SELECT perID FROM person WHERE perID = $1";
-    getPerIDValues = [newUsername];
-    duplicatePerID = false;
+    // Check to see if new perID already exists
+    let getPerIDQuery = "SELECT perID FROM person WHERE perID = $1";
+    let getPerIDValues = [newPerID];
     db.query(getPerIDQuery, getPerIDValues, (err, result) => {
         if (err) {
             console.log(err);
             res.json({success: false, message: 'Failed to create new user'});
-        } else if (result.rowCount > 0) {
+        }
+        
+        // Check rowCount > 0 to see if newPerID already exists
+        if (result.rowCount) {
+            // Duplicate perID exists so send error message
             duplicatePerID = true;
             res.json({success: false, message: 'ID already exists'});
-        }
-
-        // Create new user if perID is unique
-        if (!duplicatePerID) {
-            createPersonQuery = "INSERT INTO person(perID, password) VALUES($1, $2) RETURNING *";
-            createPersonValues = [newUsername, newPassword];
+        } else {
+            // Create new user since new perID is unique
+            let createPersonQuery = "INSERT INTO person(perID, password) VALUES($1, $2) RETURNING *";
+            let createPersonValues = [newPerID, newPassword];
             db.query(createPersonQuery, createPersonValues, (err, result) => {
                 if (err) {
                     console.log(err);
