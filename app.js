@@ -155,6 +155,12 @@ app.get("/create_module", function (req, res) {
     res.end();
 })
 
+// render page to create a user
+app.get("/create_user", function (req, res) {
+    res.render('create_user');
+    res.end();
+})
+
 // add a module
 app.post("/add_module", function (req, res) {
     db.query("INSERT INTO module (moduleID, moduleTitle, moduleDescription) VALUES ($1, $2, $3)", [req.body.moduleID, req.body.moduleTitle, req.body.moduleDescription], function (err, result) {
