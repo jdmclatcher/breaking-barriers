@@ -81,6 +81,64 @@ app.post("/login", function(req, res) {
     })
 });
 
+// Create New User
+app.post("/create_user", (req, res) => {
+    // Extract new perID and password
+    let {newPerID, newPassword, newUserType} = req.body;
+
+    // Check to see if new perID already exists
+    let getPerIDQuery = "SELECT perID FROM person WHERE perID = $1";
+    let getPerIDValues = [newPerID];
+    db.query(getPerIDQuery, getPerIDValues, (err, result) => {
+        if (err) {
+            console.log(err);
+            res.json({success: false, message: 'Failed to create new user'});
+        }
+        
+        // Check rowCount > 0 to see if newPerID already exists
+        if (result.rowCount) {
+            // Duplicate perID exists so send error message
+            res.json({success: false, message: 'ID already exists'});
+        } else {
+            // Create new user since new perID is unique
+            let createPersonQuery = "INSERT INTO person(perID, password) VALUES($1, $2) RETURNING *";
+            let createPersonValues = [newPerID, newPassword];
+            db.query(createPersonQuery, createPersonValues, (err, result) => {
+                if (err) {
+                    console.log(err);
+                    res.json({success: false, message: 'Failed to create new user'});
+                } else {
+                    // Insert new perID into appropriate user type table (admin, instructor, student)
+                    let createUserTypeQuery;
+                    let createUserTypeValues;
+                    switch(newUserType) {
+                        case "admin":
+                            createUserTypeQuery = "INSERT INTO administrator(perID) VALUES($1) RETURNING *";
+                            createUserTypeValues = [newPerID];
+                            break;
+                        case "instructor":
+                            createUserTypeQuery = "INSERT INTO instructor(perID) VALUES($1) RETURNING *";
+                            createUserTypeValues = [newPerID];
+                            break;
+                        default:
+                            console.log("error");
+                    }
+
+                    db.query(createUserTypeQuery, createUserTypeValues, (err, result) => {
+                        if (err) {
+                            console.log(err);
+                            res.json({success: false, message: 'Failed to create new user'});
+                        } else {
+                            res.json({success: true, message: "New Account successfully created"});
+                        }
+                    });
+                }
+            });
+        }
+    });
+});
+
+
 // main menu screen
 app.get("/menu", function (req, res) {
     if (userType == null) {
@@ -115,6 +173,12 @@ app.get("/modules", function(req, res) {
 // render page to create a module
 app.get("/create_module", function (req, res) {
     res.render('create_module');
+    res.end();
+})
+
+// render page to create a user
+app.get("/create_user", function (req, res) {
+    res.render('create_user');
     res.end();
 })
 
