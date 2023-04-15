@@ -10,54 +10,47 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="../../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
-    <style>
-        h2 {text-align: center}
-        h4 {text-align: center}
-        form {margin-left: 105%; width: 400px}
-    </style>
 </head>
 <body>
-<div class="container">
-    <div class="page-header">
-        <h2 class="display-3 p-3">Create Module</h2>
-        <h4>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-menu-button-wide" viewBox="0 0 16 16">
-                <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0h13A1.5 1.5 0 0 1 16 1.5v2A1.5 1.5 0 0 1 14.5 5h-13A1.5 1.5 0 0 1 0 3.5v-2zM1.5 1a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-13z"/>
-                <path d="M2 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm10.823.323-.396-.396A.25.25 0 0 1 12.604 2h.792a.25.25 0 0 1 .177.427l-.396.396a.25.25 0 0 1-.354 0zM0 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8zm1 3v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2H1zm14-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2h14zM2 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
-            </svg>
-            <a href="/menu" class="link-danger">Return to Menu</a>
-        </h4>
-    </div>
-    <div class="col col-md-4">
-        <form method="POST" action="/add_module">
-            <div>
-                <h3>Module Info</h3>
-            </div>
-            <div class="form-group">
-                <label for="moduleID">Module ID*:</label>
-                <input type="number" class="form-control" name="moduleID" id="moduleID" required>
-            </div>
-            <div class="form-group">
-                <label for="moduleTitle">Module Title:</label>
-                <input type="text" class="form-control" name="moduleTitle" id="moduleTitle">
-            </div>
-            <div class="form-group">
-                <label for="moduleDescription">Module Description:</label>
-                <input type="text" class="form-control" name="moduleDescription" id="moduleDescription">
-            </div>
-            <div hidden id="message" role="alert">
-                <p></p>
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Create Module" id="createModule">
-                <button type="reset" onclick="window.location.href='/menu'" class="btn btn-danger">Cancel</button>
-            </div>
-            <div class="text-black" role="alert">
-                <p>* = required</p>
-            </div>
-            <br />
-            <br />
-        </form>
+<div class="d-flex justify-content-center p-3">
+    <div>
+        <div class="text-center">
+            <h2 class="display-3 p-3">Create Module</h2>
+            <h5>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-menu-button-wide" viewBox="0 0 16 16">
+                    <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0h13A1.5 1.5 0 0 1 16 1.5v2A1.5 1.5 0 0 1 14.5 5h-13A1.5 1.5 0 0 1 0 3.5v-2zM1.5 1a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-13z"/>
+                    <path d="M2 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm10.823.323-.396-.396A.25.25 0 0 1 12.604 2h.792a.25.25 0 0 1 .177.427l-.396.396a.25.25 0 0 1-.354 0zM0 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8zm1 3v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2H1zm14-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2h14zM2 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
+                </svg>
+                <a href="/modules" class="link-danger">Return to Modules</a>
+            </h5>
+        </div>
+        <div class="p-3">
+            <form method="POST" action="/add_module">
+                <div class="text-center">
+                    <h3>Module Info</h3>
+                </div>
+                <div class="form-group">
+                    <label for="moduleTitle">Module Title*:</label>
+                    <input required type="text" class="form-control" name="moduleTitle" id="moduleTitle">
+                </div>
+                <div class="form-group">
+                    <label for="moduleDescription">Module Description:</label>
+                    <input type="text" class="form-control" name="moduleDescription" id="moduleDescription">
+                </div>
+                <div class="text-black" role="alert">
+                    <p>* = required</p>
+                </div>
+                <div class="d-flex justify-content-center p-1">
+                    <input type="submit" class="btn btn-primary" value="Create Module" id="createModule">
+                </div>
+                <div class="d-flex justify-content-center p-1">
+                    <button type="reset" onclick="window.location.href='/modules'" class="btn btn-danger">Cancel</button>
+                </div>
+                <div hidden id="message" role="alert"></div>
+                <br />
+                <br />
+            </form>
+        </div>
     </div>
 </div>
 </body>

@@ -10,36 +10,28 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="../../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
-    <style>
-        h1 {text-align: center; margin-top: 20%}
-        form {margin-left: 125%; width: 250px}
-
-    </style>
 </head>
 <body>
-
-<div class="container">
-    <h1 class="display-3 p-3">
+    <h1 class="display-3 p-4 text-center">
         Login
     </h1>
-    <div class="col-md-4 p-3">
-        <form method="POST" action="/login">
-            <div class="mb-3">
-                <label for="id" class="form-label">ID:</label>
-                <input type="text" class="form-control" name="id" id="id" required>
-            </div>
-            <div class="mb-3">
-                <label for="password">Password:</label>
-                <input type="password" class="form-control" name="password" id="password" required align="center">
-            </div>
-            <div hidden id="message" class="alert alert-danger" role="alert">
-                <p></p>
-            </div>
-            <div class="p-1">
-                <input type="submit" class="btn btn-primary" value="Login" id="login">
-            </div>
-        </form>
+    <div class="d-flex justify-content-center">
+        <div class="col-md-4 p-3">
+            <form method="POST" action="/login">
+                <div class="mb-3">
+                    <label for="id" class="form-label">ID:</label>
+                    <input type="text" class="form-control" name="id" id="id" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" name="password" id="password" required>
+                </div>
+                <div hidden id="message" class="alert alert-danger" role="alert"></div>
+                <div class="p-1">
+                    <input type="submit" class="btn btn-primary" value="Login" id="login">
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 </body>
 </html>
