@@ -33,7 +33,7 @@ app.post("/login", function(req, res) {
     let passwordMatch = false;
     db.query("SELECT password FROM person WHERE perID = $1", [req.body.id], function (err, result) {
         if (err || result.rows[0] == null) {
-            console.log(result.rows)
+            // console.log(result.rows)
             res.json({success: false, message: "ID or Password is incorrect."})
         } else {
             // rows - returned list of objects from sql query
@@ -120,8 +120,8 @@ app.get("/create_module", function (req, res) {
 
 // add a module
 app.post("/add_module", function (req, res) {
-    db.query("INSERT INTO module (moduleID, moduleTitle, moduleDescription) VALUES ($1, $2, $3)", [req.body.moduleID, req.body.moduleTitle, req.body.moduleDescription], function (err, result) {
-        console.log(err)
+    db.query("INSERT INTO module (moduleTitle, moduleDescription) VALUES ($1, $2)", [req.body.moduleTitle, req.body.moduleDescription], function (err, result) {
+        // console.log(err)
         if (err) {
             res.json({ success: false, message: "Error creating module." })
         } else {
