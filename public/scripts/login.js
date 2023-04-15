@@ -7,6 +7,7 @@ loginButton.addEventListener("click", login);
 let message = document.getElementById("message")
 
 function login(event) {
+    message.hidden = true
     event.preventDefault()
     let xhr = new XMLHttpRequest
     xhr.addEventListener("load", responseHandler)
@@ -20,12 +21,14 @@ function login(event) {
 
 function responseHandler() {
     if (this.response.success) {
-        password.value = "";
-        id.value = "";
+        password.value = ""
+        id.value = ""
         location.href = 'menu'
+        message.hidden = true
     } else {
         message.style.display = "block"
-        message.innerText = this.response.message
+        message.innerHTML = this.response.message
+        message.hidden = false
         password.value = ""
     }
 }
