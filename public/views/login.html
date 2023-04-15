@@ -27,8 +27,13 @@
                     <input type="password" class="form-control" name="password" id="password" required>
                 </div>
                 <div hidden id="message" class="alert alert-danger" role="alert"></div>
-                <div class="p-1">
+                <div class="d-flex justify-content-center">
                     <input type="submit" class="btn btn-primary" value="Login" id="login">
+                </div>
+            </form>
+            <form method="get" action="/create_user">
+                <div class="d-flex justify-content-center p-3">
+                    <button type="submit" class="btn btn-sm btn-secondary">Create User</button>
                 </div>
             </form>
         </div>
